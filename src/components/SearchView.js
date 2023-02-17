@@ -5,6 +5,7 @@ import FoodCard from "./FoodCard.js"
 const SearchView = () => {
 
  const [searchInput, setSearchInput] = useState("");
+ let result = [];
 
  const menu = [
 
@@ -41,9 +42,7 @@ const handleChange = (e) => {
 };
 
 if (searchInput.length > 0) {
-    menu.filter((country) => {
-    return country.name.match(searchInput);
-});
+    result = (menu.filter(country =>  country.name.match(searchInput)));
 }
 
 return <div className={styles.searchView}>
@@ -53,7 +52,7 @@ return <div className={styles.searchView}>
        onChange={handleChange}
        value={searchInput} />
     <div className={styles.searchItems}>
-    { menu.map(menu_item => <FoodCard key={menu_item.id} price={menu_item.price} name={menu_item.name}/>)}
+    { result.map(menu_item => <FoodCard key={menu_item.id} price={menu_item.price} name={menu_item.name}/>)}
     </div>
 </div>
 };
