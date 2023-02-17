@@ -6,6 +6,7 @@
 
 .searchItems {
     display: inline-flex;
+    overflow-x: scroll;
     justify-content:space-evenly;
 }
 

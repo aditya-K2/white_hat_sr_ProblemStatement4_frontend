@@ -30,9 +30,9 @@ const handleChange = (e) => {
   setSearchInput(e.target.value.toLowerCase());
 };
 
-if (searchInput.length > 0) {
+// if (searchInput.length > 0) {
     result = (menu.filter(m =>  m.name.toLowerCase().match(searchInput)));
-}
+// }
 
 return <div className={styles.searchView}>
     <input

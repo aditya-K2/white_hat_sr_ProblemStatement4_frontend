@@ -1,4 +1,19 @@
 .cartView {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin: 10%;
+    background: grey;
+    padding: 1rem;
+}
+
+.orderDetails {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+.done {
+    background: grey;
+    padding: 1rem;
 }
