@@ -2,9 +2,9 @@ import React, {useState} from 'react'
 import styles from "./SearchView.module.css"
 import FoodCard from "./FoodCard.js"
 
-const SearchView = () => {
-
+const SearchView = ({getVal, cardHandler}) => {
  const [searchInput, setSearchInput] = useState("");
+
  let result = [];
 
  const menu = [
@@ -42,7 +42,7 @@ const handleChange = (e) => {
 };
 
 if (searchInput.length > 0) {
-    result = (menu.filter(country =>  country.name.match(searchInput)));
+    result = (menu.filter(m =>  m.name.match(searchInput)));
 }
 
 return <div className={styles.searchView}>
@@ -52,7 +52,8 @@ return <div className={styles.searchView}>
        onChange={handleChange}
        value={searchInput} />
     <div className={styles.searchItems}>
-    { result.map(menu_item => <FoodCard key={menu_item.id} price={menu_item.price} name={menu_item.name}/>)}
+    { result.map(m => <FoodCard currentCount={getVal(m.name)}
+        handler={cardHandler} key={m.id} price={m.price} name={m.name}/>)}
     </div>
 </div>
 };
