@@ -1,9 +1,12 @@
 import React from "react";
-import Login from "./Login.js"
+import SearchView from "./SearchView.js"
 
 function Home(){
     return (
-        <Login/>
+        <div>
+            <h1>Home</h1>
+            <SearchView/>
+        </div>
     );
 }
 

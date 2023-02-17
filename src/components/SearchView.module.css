@@ -1,0 +1,13 @@
+.searchView {
+    display: flex;
+    flex-direction: column;
+    /* margin: 20%; */
+}
+
+.searchItems {
+    display: inline;
+}
+
+body {
+    background: black;
+}
