@@ -4,18 +4,9 @@ import styles from "./Vendor.module.css"
 const URL="https://canteensystem.azurewebsites.net/"
 const WEB_SOCK="wss://canteensystem.azurewebsites.net/ws/notifications/neworders"
 
-function VendorItems({orders, handler}) {
-  return (
-      <div className="orders">
-       { Array.from(orders.keys()).map(id => <VendorItem id={id} handler={handler} orders={orders} />) }
-      </div>
-  );
-}
-
-function VendorItem({orders, id, handler}) {
-  let m = orders.get(id)
+function VendorItem({m, id, handler}) {
   function getOn() {
-      handler(m.id)
+      handler(id)
   }
   return (
     <div className={styles.Top}>
@@ -26,21 +17,12 @@ function VendorItem({orders, id, handler}) {
 }
 
 function Vendor(props){
-    let [orders, setOrders] = useState(new Map())
+    let [orders, setOrders] = useState([])
     let [loading, setLoading ] = useState(true)
-    let [timeQ, setTimeQ] = useState(1);
     let [first, setFirst] = useState(true);
-    function addToOrders(order) {
-        setOrders(orders.set(order.id, order))
-    }
-
-    function completeOrder(id) {
-        setOrders(orders.delete(id))
-    }
-
     function nextState(status) {
         switch (status) {
-            case "pending" : {
+            case "placed" : {
                 return "preparing";
             }
             case "preparing" : {
@@ -53,27 +35,26 @@ function Vendor(props){
     }
 
     function changeStatus(id) {
-        let m = orders.get(id);
         setLoading(true)
+        let m = orders[id]
         axios.put(URL + "/orders", {
-            order_id_list : [id],
+            order_id_list : [m.id],
             next_state : nextState(m.status),
         }).then(function (response) {
+            if (response.data !== undefined){
             setLoading(false)
-            console.log(response)
-            setOrders(orders.set(id, m))
+            setOrders(response.data)
+            setFirst(true)
+            }
         }).catch(function (error) {
             console.log(error);
         });
-        for (let [key, value] of orders) {
-            console.log(key, value)
-        }
     }
 
     if (first) {
         axios.get(URL + `/orders`, {}).
             then(function (response) {
-                (response.data.forEach(e => {  return setOrders(orders.set(e.id, e)) }))
+                setOrders(response.data)
                 setLoading(false)
             }).catch(function (error) {
                 console.log(error);
@@ -82,28 +63,31 @@ function Vendor(props){
     }
 
     if (loading) {
-        return <div class="loading">
-            loading
+        return <div className="loading">
+            Loading......
             </div>
     }
 
-    const socket = new WebSocket('wss://canteensystem.azurewebsites.net/ws/notifications/neworders')
-
-    // Connection opened
-    socket.addEventListener('open', (event) => {
-        socket.send(JSON.stringify({time_quantum:10}));
-    });
-
-    // Listen for messages
-    socket.addEventListener('message', (event) => {
-        console.log('Message from server ', event.data);
-        socket.send(JSON.stringify({time_fquantum:10}));
-
-    });
-
     return (
-        <VendorItems handler={changeStatus} orders={orders}/>
+      <div className="orders">
+       { orders.map((id, index) => <VendorItem key={index} id={index} handler={changeStatus} m={id} />) }
+      </div>
     )
 }
 
 export default Vendor;
+
+
+// const socket = new WebSocket('wss://canteensystem.azurewebsites.net/ws/notifications/neworders')
+
+// // Connection opened
+// socket.addEventListener('open', (event) => {
+//     socket.send(JSON.stringify({time_quantum:10}));
+// });
+
+// // Listen for messages
+// socket.addEventListener('message', (event) => {
+//     console.log('Message from server ', event.data);
+//     socket.send(JSON.stringify({time_fquantum:10}));
+
+// });

@@ -43,10 +43,10 @@ function Checkout({getVal, inCart, cardHandler, doneFunc, reqHandler}) {
       { id: 5,  name: "Vada Pav",     price: 15, img:"https://media.istockphoto.com/id/1329213718/photo/vada-pav.jpg?s=612x612&w=is&k=20&c=GCBJ6N0dZsK9KeccUpuS8mXabs7lA1uib9Ls9PeOQWQ="},
       { id: 6,  name: "Pattice",      price: 15, img:"https://media.istockphoto.com/id/1329213718/photo/vada-pav.jpg?s=612x612&w=is&k=20&c=GCBJ6N0dZsK9KeccUpuS8mXabs7lA1uib9Ls9PeOQWQ="},
       { id: 7,  name: "Samosa",       price: 20, img:"https://media.istockphoto.com/id/1329213718/photo/vada-pav.jpg?s=612x612&w=is&k=20&c=GCBJ6N0dZsK9KeccUpuS8mXabs7lA1uib9Ls9PeOQWQ="},
-    
+
     ];
     const menus = [
-    
+
       { id: 8,  name: "Chole Bhature",price: 60, img:"https://media.istockphoto.com/id/1329213718/photo/vada-pav.jpg?s=612x612&w=is&k=20&c=GCBJ6N0dZsK9KeccUpuS8mXabs7lA1uib9Ls9PeOQWQ="},
       { id: 9,  name: "Coffee",       price: 25, img:"https://media.istockphoto.com/id/1329213718/photo/vada-pav.jpg?s=612x612&w=is&k=20&c=GCBJ6N0dZsK9KeccUpuS8mXabs7lA1uib9Ls9PeOQWQ="},
       { id: 10, name: "Tea",          price: 10, img:"https://media.istockphoto.com/id/1329213718/photo/vada-pav.jpg?s=612x612&w=is&k=20&c=GCBJ6N0dZsK9KeccUpuS8mXabs7lA1uib9Ls9PeOQWQ="},

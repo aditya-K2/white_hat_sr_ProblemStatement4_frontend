@@ -14,6 +14,7 @@ function App() {
     let [seats, setSeats] = useState(0)
     let [email, setEmail] = useState('')
     let [loggedIn, setLoggedIn] = useState(false)
+    let [vendor, setVendor] = useState(false)
 
     function cardHandler(name, count) {
         setCart(cart.set(name, count));
@@ -86,6 +87,12 @@ function App() {
         setLoggedIn(true)
     }
 
+    function vendorHandle() {
+        console.log("Here")
+        setVendor(true)
+        setLoggedIn(true)
+    }
+
     function carti() {
         let a = []
         for (let [key, value] of cart) {
@@ -112,14 +119,17 @@ function App() {
         // console.log(post(URL + "booking", data));
     }
 
-   // if (!loggedIn) {
-   //     return <Login loginHandle={loginHandle}/>
-   // }
+   if (!loggedIn) {
+       return <Login signinHandle={vendorHandle} loginHandle={loginHandle}/>
+   }
 
-    // { co && <Checkout reqHandler={reqHandler} doneFunc={doneFunc} inCart={inCart} getVal={getVal} cardHandler={cardHandler}/> || <Home getVal={getVal} subHandle={subHandle} cardHandler={cardHandler}/> }
+   if (vendor) {
+       return <Vendor/>
+   }
+
   return (
     <div className="App">
-      <Vendor/>
+    { co && <Checkout reqHandler={reqHandler} doneFunc={doneFunc} inCart={inCart} getVal={getVal} cardHandler={cardHandler}/> || <Home getVal={getVal} subHandle={subHandle} cardHandler={cardHandler}/> }
     </div>
   );
 }
