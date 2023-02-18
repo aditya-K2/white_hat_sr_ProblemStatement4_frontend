@@ -28,14 +28,6 @@ span {
   padding-left: 1rem;
 }
 
-button {
-  margin: 1rem;
-  border-radius: 1rem;
-  border-width: 0px;
-  padding: 1rem;
-  background: #FF4200;
-}
-
 .cla {
   display: flex;
   justify-content: center;

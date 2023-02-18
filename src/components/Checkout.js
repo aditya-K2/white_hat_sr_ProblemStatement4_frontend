@@ -1,10 +1,39 @@
 import React, {useState} from "react"
 import styles from "./Checkout.module.css"
 import FoodCard from "./FoodCard.js"
+import  DtPicker  from 'react-calendar-datetime-picker'
+import PortionButton from "./PortionButton.js"
+import 'react-calendar-datetime-picker/dist/index.css'
 
-function Checkout({getVal, inCart, cardHandler, doneFunc}) {
+const DatePicker = ({reqHandler, _handler, _count}) => {
+  const [date, setDate] = useState(null)
+  reqHandler(date, _count)
+  return (
+      <div className={styles.righti}>
+    <DtPicker
+      onChange={setDate}
+      placeHolder="Select Time"
+      withTime
+      showTimeInput
+    />
+      <span>Number of Seats:</span>
+      <div className={styles.hello}>
+        <PortionButton handler={_handler} currentCount={_count}/>
+      </div>
+    </div>
+  )
+}
+
+function Checkout({getVal, inCart, cardHandler, doneFunc, reqHandler}) {
     // let [ goToHome, setHome ] = useState(false);
-    // let [ total, setTotal ] = useState(0);
+    let [ _count, setCount ] = useState(1);
+
+    function _handler(name, count) {
+        if (count >= 4) {
+            setCount(1);
+        }
+        setCount(count);
+    }
      const menu = [
 
       { id: 1,  name: "Pohe",         price: 25, img:"https://as2.ftcdn.net/v2/jpg/04/72/01/73/1000_F_472017398_v6JPATak7p8VenbHzoW3O0PhGA3fircQ.jpg"},
@@ -27,12 +56,15 @@ function Checkout({getVal, inCart, cardHandler, doneFunc}) {
         <div class="orderBody">
             <div className={styles.orderDetails}>
                 <h1 className={styles.odetails}> Order Details </h1>
-                <button className={styles.done} onClick={doneFunc}>Done</button>
             </div>
             <div className={styles.cartView}>
                 {   menu.filter(e =>  inCart(e.name)).
                     map(e => {e.oprice = e.price; e.price = getVal(e.name) * e.price; return e }).
                     map(e => <FoodCard currentCount={getVal(e.name)} update={true} handler={cardHandler} m={e}/>) }
+            <div class="bottom">
+                <DatePicker inputClass={styles.clock} _handler={_handler} _count={_count} reqHandler={reqHandler}/>
+                <button className={styles.done} onClick={doneFunc}>Done</button>
+            </div>
             </div>
         </div>
     );

@@ -3,8 +3,9 @@
     flex-direction: row;
     justify-content: space-evenly;
     margin: 10%;
-    background: grey;
+    background: #cbcbcb;
     padding: 1rem;
+    border-radius: 1rem;
 }
 
 .orderDetails {
@@ -16,4 +17,36 @@
 .done {
     background: grey;
     padding: 1rem;
+    margin-left: 3.4rem;
+}
+
+input {
+    max-width: 60%;
+    margin-left: -2rem;
+    padding-left: 0rem;
+}
+
+.hello {
+    display: flex;
+    flex-direction: row;
+    background: white;
+    border-radius: 1rem;
+    max-width: 6rem;
+    min-width: 6rem;
+    margin-left: 1.6rem;
+    margin-top: 1rem;
+}
+
+.righti {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 1rem;
+}
+
+.bottom {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 1rem;
 }

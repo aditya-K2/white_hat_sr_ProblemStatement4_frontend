@@ -30,19 +30,19 @@ const handleChange = (e) => {
   setSearchInput(e.target.value.toLowerCase());
 };
 
-// if (searchInput.length > 0) {
-    result = (menu.filter(m =>  m.name.toLowerCase().match(searchInput)));
-// }
+result = (menu.filter(m =>  m.name.toLowerCase().match(searchInput)));
 
 return <div className={styles.searchView}>
     <input
        type="search"
        placeholder="Search here"
        onChange={handleChange}
-       value={searchInput} />
+       value={searchInput}
+       className={styles.searchBar}
+    />
     <div className={styles.searchItems}>
     { result.map(m => <FoodCard currentCount={getVal(m.name)}
-        handler={cardHandler} m={m}/>)}
+        update={false} handler={cardHandler} m={m}/>)}
     </div>
 </div>
 };

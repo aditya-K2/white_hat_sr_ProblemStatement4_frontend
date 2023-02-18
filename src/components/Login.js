@@ -1,16 +1,31 @@
 import React from "react";
+import {useState} from "react";
 import styles from "./Login.module.css"
 
-function Login() {
+function Login({loginHandle, signinHandle}) {
+    let [userName, setUserName ] = useState('');
+    let [password, setPassword ] = useState('');
+
+    function updateUserName(username) {
+        setUserName(username.target.value)
+    }
+
+    function updatePassword(password) {
+        setPassword(password.target.value)
+    }
+
+    function _loginHandle() {
+        loginHandle(userName, password)
+    }
     return (
         <div className={styles.loginBody}>
           <span className={styles.userName}>Email </span>
-          <input type="Enter User Name" />
+          <input onChange={updateUserName} type="Enter User Name" />
           <span className={styles.password}> Password </span>
-          <input type="Enter Password" />
+          <input onChange={updatePassword} type="Enter Password" />
           <div className={styles.buttonBox}>
-            <button className={styles.login}> Login </button>
-            <button className={styles.signing}> Sign Up </button>
+            <button className={styles.login} onClick={_loginHandle}> Login </button>
+            <button className={styles.signing} onClick={signinHandle}> Sign Up </button>
           </div>
         </div>
     );
