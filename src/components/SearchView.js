@@ -6,7 +6,7 @@ const SearchView = ({getVal, cardHandler}) => {
  const [searchInput, setSearchInput] = useState("");
 
  let result = [];
-
+ let results = []; 
  const menu = [
 
   { id: 1,  name: "Pohe",         price: 25, img:"https://as2.ftcdn.net/v2/jpg/04/72/01/73/1000_F_472017398_v6JPATak7p8VenbHzoW3O0PhGA3fircQ.jpg"},
@@ -16,22 +16,25 @@ const SearchView = ({getVal, cardHandler}) => {
   { id: 5,  name: "Vada Pav",     price: 15, img:"https://media.istockphoto.com/id/1329213718/photo/vada-pav.jpg?s=612x612&w=is&k=20&c=GCBJ6N0dZsK9KeccUpuS8mXabs7lA1uib9Ls9PeOQWQ="},
   { id: 6,  name: "Pattice",      price: 15, img:"https://media.istockphoto.com/id/1329213718/photo/vada-pav.jpg?s=612x612&w=is&k=20&c=GCBJ6N0dZsK9KeccUpuS8mXabs7lA1uib9Ls9PeOQWQ="},
   { id: 7,  name: "Samosa",       price: 20, img:"https://media.istockphoto.com/id/1329213718/photo/vada-pav.jpg?s=612x612&w=is&k=20&c=GCBJ6N0dZsK9KeccUpuS8mXabs7lA1uib9Ls9PeOQWQ="},
+
+];
+const menus = [
+
   { id: 8,  name: "Chole Bhature",price: 60, img:"https://media.istockphoto.com/id/1329213718/photo/vada-pav.jpg?s=612x612&w=is&k=20&c=GCBJ6N0dZsK9KeccUpuS8mXabs7lA1uib9Ls9PeOQWQ="},
   { id: 9,  name: "Coffee",       price: 25, img:"https://media.istockphoto.com/id/1329213718/photo/vada-pav.jpg?s=612x612&w=is&k=20&c=GCBJ6N0dZsK9KeccUpuS8mXabs7lA1uib9Ls9PeOQWQ="},
   { id: 10, name: "Tea",          price: 10, img:"https://media.istockphoto.com/id/1329213718/photo/vada-pav.jpg?s=612x612&w=is&k=20&c=GCBJ6N0dZsK9KeccUpuS8mXabs7lA1uib9Ls9PeOQWQ="},
   { id: 11, name: "Cold Coffee",  price: 30, img:"https://media.istockphoto.com/id/1329213718/photo/vada-pav.jpg?s=612x612&w=is&k=20&c=GCBJ6N0dZsK9KeccUpuS8mXabs7lA1uib9Ls9PeOQWQ="},
   { id: 12, name: "Maggi",        price: 30, img:"https://media.istockphoto.com/id/1329213718/photo/vada-pav.jpg?s=612x612&w=is&k=20&c=GCBJ6N0dZsK9KeccUpuS8mXabs7lA1uib9Ls9PeOQWQ="},
   { id: 13, name: "Sandwich",     price: 40, img:"https://media.istockphoto.com/id/1329213718/photo/vada-pav.jpg?s=612x612&w=is&k=20&c=GCBJ6N0dZsK9KeccUpuS8mXabs7lA1uib9Ls9PeOQWQ="},
-
+  { id: 14, name: "Burger",     price: 50, img:"https://media.istockphoto.com/id/1329213718/photo/vada-pav.jpg?s=612x612&w=is&k=20&c=GCBJ6N0dZsK9KeccUpuS8mXabs7lA1uib9Ls9PeOQWQ="},
 ];
-
 const handleChange = (e) => {
   e.preventDefault();
   setSearchInput(e.target.value.toLowerCase());
 };
 
 result = (menu.filter(m =>  m.name.toLowerCase().match(searchInput)));
-
+results = (menus.filter(m =>  m.name.toLowerCase().match(searchInput)));
 return <div className={styles.searchView}>
     <input
        type="search"
@@ -42,6 +45,10 @@ return <div className={styles.searchView}>
     />
     <div className={styles.searchItems}>
     { result.map(m => <FoodCard currentCount={getVal(m.name)}
+        update={false} handler={cardHandler} m={m}/>)}
+    </div>
+    <div className={styles.searchItems}>
+    { results.map(m => <FoodCard currentCount={getVal(m.name)}
         update={false} handler={cardHandler} m={m}/>)}
     </div>
 </div>

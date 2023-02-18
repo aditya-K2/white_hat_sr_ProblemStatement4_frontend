@@ -34,7 +34,7 @@ function Checkout({getVal, inCart, cardHandler, doneFunc, reqHandler}) {
         }
         setCount(count);
     }
-     const menu = [
+    const menu = [
 
       { id: 1,  name: "Pohe",         price: 25, img:"https://as2.ftcdn.net/v2/jpg/04/72/01/73/1000_F_472017398_v6JPATak7p8VenbHzoW3O0PhGA3fircQ.jpg"},
       { id: 2,  name: "Idli",         price: 40, img:"https://as2.ftcdn.net/v2/jpg/04/26/94/99/1000_F_426949957_iFC4zrETHm1lFMiLpsVXeAhFQe6vCNAk.jpg"},
@@ -43,13 +43,17 @@ function Checkout({getVal, inCart, cardHandler, doneFunc, reqHandler}) {
       { id: 5,  name: "Vada Pav",     price: 15, img:"https://media.istockphoto.com/id/1329213718/photo/vada-pav.jpg?s=612x612&w=is&k=20&c=GCBJ6N0dZsK9KeccUpuS8mXabs7lA1uib9Ls9PeOQWQ="},
       { id: 6,  name: "Pattice",      price: 15, img:"https://media.istockphoto.com/id/1329213718/photo/vada-pav.jpg?s=612x612&w=is&k=20&c=GCBJ6N0dZsK9KeccUpuS8mXabs7lA1uib9Ls9PeOQWQ="},
       { id: 7,  name: "Samosa",       price: 20, img:"https://media.istockphoto.com/id/1329213718/photo/vada-pav.jpg?s=612x612&w=is&k=20&c=GCBJ6N0dZsK9KeccUpuS8mXabs7lA1uib9Ls9PeOQWQ="},
+    
+    ];
+    const menus = [
+    
       { id: 8,  name: "Chole Bhature",price: 60, img:"https://media.istockphoto.com/id/1329213718/photo/vada-pav.jpg?s=612x612&w=is&k=20&c=GCBJ6N0dZsK9KeccUpuS8mXabs7lA1uib9Ls9PeOQWQ="},
       { id: 9,  name: "Coffee",       price: 25, img:"https://media.istockphoto.com/id/1329213718/photo/vada-pav.jpg?s=612x612&w=is&k=20&c=GCBJ6N0dZsK9KeccUpuS8mXabs7lA1uib9Ls9PeOQWQ="},
       { id: 10, name: "Tea",          price: 10, img:"https://media.istockphoto.com/id/1329213718/photo/vada-pav.jpg?s=612x612&w=is&k=20&c=GCBJ6N0dZsK9KeccUpuS8mXabs7lA1uib9Ls9PeOQWQ="},
       { id: 11, name: "Cold Coffee",  price: 30, img:"https://media.istockphoto.com/id/1329213718/photo/vada-pav.jpg?s=612x612&w=is&k=20&c=GCBJ6N0dZsK9KeccUpuS8mXabs7lA1uib9Ls9PeOQWQ="},
       { id: 12, name: "Maggi",        price: 30, img:"https://media.istockphoto.com/id/1329213718/photo/vada-pav.jpg?s=612x612&w=is&k=20&c=GCBJ6N0dZsK9KeccUpuS8mXabs7lA1uib9Ls9PeOQWQ="},
       { id: 13, name: "Sandwich",     price: 40, img:"https://media.istockphoto.com/id/1329213718/photo/vada-pav.jpg?s=612x612&w=is&k=20&c=GCBJ6N0dZsK9KeccUpuS8mXabs7lA1uib9Ls9PeOQWQ="},
-
+      { id: 14, name: "Burger",     price: 50, img:"https://media.istockphoto.com/id/1329213718/photo/vada-pav.jpg?s=612x612&w=is&k=20&c=GCBJ6N0dZsK9KeccUpuS8mXabs7lA1uib9Ls9PeOQWQ="},
     ];
 
     return (
@@ -61,6 +65,9 @@ function Checkout({getVal, inCart, cardHandler, doneFunc, reqHandler}) {
                 {   menu.filter(e =>  inCart(e.name)).
                     map(e => {e.oprice = e.price; e.price = getVal(e.name) * e.price; return e }).
                     map(e => <FoodCard currentCount={getVal(e.name)} update={true} handler={cardHandler} m={e}/>) }
+                    {   menus.filter(e =>  inCart(e.name)).
+                      map(e => {e.oprice = e.price; e.price = getVal(e.name) * e.price; return e }).
+                      map(e => <FoodCard currentCount={getVal(e.name)} update={true} handler={cardHandler} m={e}/>) }
             <div class="bottom">
                 <DatePicker inputClass={styles.clock} _handler={_handler} _count={_count} reqHandler={reqHandler}/>
                 <button className={styles.done} onClick={doneFunc}>Done</button>
